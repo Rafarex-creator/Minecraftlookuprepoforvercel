@@ -10,6 +10,7 @@
             text-align: center;
             padding-top: 50px;
         }
+
         input {
             padding: 10px;
             width: 250px;
@@ -17,6 +18,7 @@
             border: none;
             font-size: 16px;
         }
+
         button {
             padding: 10px 15px;
             border-radius: 5px;
@@ -26,9 +28,11 @@
             font-size: 16px;
             cursor: pointer;
         }
+
         button:hover {
             background: #45a049;
         }
+
         .card {
             margin-top: 30px;
             padding: 20px;
@@ -38,16 +42,35 @@
             min-width: 300px;
             transition: transform 0.3s;
         }
+
+        /* 3D hover effect for head */
         .card:hover {
             transform: perspective(600px) rotateY(10deg);
         }
+
         img {
             margin-top: 10px;
             transition: transform 0.3s;
         }
-        img:hover {
+
+        img.head:hover {
             transform: rotateY(10deg);
         }
+
+        /* 3D rotation animation for body */
+        img.body {
+            display: block;
+            margin: 10px auto;
+            width: 150px;
+            transform-style: preserve-3d;
+            animation: spin 5s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
         .error {
             color: red;
         }
@@ -94,10 +117,10 @@ async function lookupPlayer() {
                 <p><strong>UUID:</strong> ${uuid}</p>
 
                 <h3>Player Head</h3>
-                <img src="https://mc-heads.net/avatar/${playerName}/100" alt="Head">
+                <img src="https://mc-heads.net/avatar/${playerName}/100" alt="Head" class="head">
 
-                <h3>Full Body</h3>
-                <img src="https://mc-heads.net/body/${playerName}/200" alt="Body">
+                <h3>Full Body (3D Spin)</h3>
+                <img src="https://mc-heads.net/body/${playerName}/200" alt="Body" class="body">
             </div>
         `;
 
@@ -117,4 +140,3 @@ document.getElementById("username").addEventListener("keyup", function(event) {
 
 </body>
 </html>
-
