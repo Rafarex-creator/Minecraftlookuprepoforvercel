@@ -67,7 +67,7 @@ async function lookupPlayer() {
     resultDiv.innerHTML = "Loading...";
 
     try {
-        // Fetch player info from PlayerDB
+        // Fetch player info from PlayerDB (CORS-friendly online)
         const response = await fetch(`https://playerdb.co/api/player/minecraft/${username}`);
         const data = await response.json();
 
@@ -93,9 +93,11 @@ async function lookupPlayer() {
 
     } catch (error) {
         resultDiv.innerHTML = "<p class='error'>Error fetching player data.</p>";
+        console.error(error);
     }
 }
 </script>
 
 </body>
 </html>
+
