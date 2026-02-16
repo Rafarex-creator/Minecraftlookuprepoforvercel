@@ -36,9 +36,17 @@
             border-radius: 10px;
             display: inline-block;
             min-width: 300px;
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: perspective(600px) rotateY(10deg);
         }
         img {
             margin-top: 10px;
+            transition: transform 0.3s;
+        }
+        img:hover {
+            transform: rotateY(10deg);
         }
         .error {
             color: red;
@@ -79,7 +87,7 @@ async function lookupPlayer() {
         const uuid = data.data.player.raw_id;
         const playerName = data.data.player.username;
 
-        // Show the info with mc-heads.net images
+        // Show info with mc-heads.net
         resultDiv.innerHTML = `
             <div class="card">
                 <h2>${playerName}</h2>
@@ -98,7 +106,15 @@ async function lookupPlayer() {
         resultDiv.innerHTML = "<p class='error'>Error fetching player data.</p>";
     }
 }
+
+// Enter key search
+document.getElementById("username").addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        lookupPlayer();
+    }
+});
 </script>
 
 </body>
 </html>
+
